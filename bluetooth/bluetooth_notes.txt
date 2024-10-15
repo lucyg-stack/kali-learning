@@ -1,0 +1,99 @@
+# installing 
+sudo apt update
+sudo apt install bluez
+
+# start the bluetooth service
+sudo systemctl start bluetooth
+sudo systemctl enable bluetooth
+
+# list bluetooth devices
+bluetoothctl
+
+# once inside the bluetoothctl prompt
+devices # to get paird devices
+
+# Scanning for Nearby Bluetooth Devices
+bluetoothctl
+power on
+discoverable on
+scan on
+scan off 
+
+# Check Device Information
+info <mac_address>
+
+# more info 
+sudo hcitool info <mac_address>
+
+# connecting to a bluetooth device
+
+# connecting to a bluetooth device
+bluetoothctl 
+power on 
+agent on # for paring 
+discoverable on 
+scan on 
+pair <mac_address>
+connect <mac_address> 
+trust <mac_address> # so that you can connect in future without paring.
+remove XX:XX:XX:XX:XX:XX # to unpair
+
+# Types of attack 
+
+Bluejacking
+Description: Sending unsolicited messages to nearby Bluetooth-enabled devices. While it's often harmless, it can be used for social engineering attacks.
+
+Bluesnarfing
+Description: Unauthorized access to the information stored on a Bluetooth device (like contacts, calendar, etc.). This often occurs when a device is vulnerable or poorly configured.
+
+BlueBorne Attack
+Description: A collection of vulnerabilities that allow attackers to execute code on nearby devices without user interaction. It can affect a wide range of devices, including smartphones, laptops, and IoT devices.
+
+Bluetooth Spoofing
+Description: An attacker masquerades as a trusted device to connect and communicate with another device. This can lead to unauthorized access and data theft.
+
+Man-in-the-Middle
+Description: Intercepting and altering communications between two Bluetooth devices. This can happen during the pairing process or ongoing communication.
+
+Bluetooth Denial of Service
+Description: Overloading a Bluetooth device with connection requests, rendering it unusable. Attackers can exploit vulnerabilities in Bluetooth stacks.
+
+# Tools for bluetooth penetration testing
+
+BlueZ: A Linux Bluetooth protocol stack. It's useful for developing and testing Bluetooth applications
+
+BlueMaho: A tool for Bluetooth scanning and exploitation.
+
+BtleJuice: A framework for Man-in-the-Middle attacks on Bluetooth Low Energy (BLE) devices.
+
+Wireshark: A network protocol analyzer that can capture and analyze Bluetooth traffic when configured correctly.
+
+Bluelog: A Bluetooth device discovery and information-gathering tool.
+
+BtleJack: A tool for intercepting Bluetooth Low Energy communications.
+
+# get contact and call history 
+
+pip install pyobex
+---------------------------------------python
+from pyobex.client import Client
+
+# Initialize Bluetooth Client
+client = Client()
+
+# Replace with your device's address
+device_address = 'XX:XX:XX:XX:XX:XX'
+
+# Connect to the device
+client.connect(device_address)
+
+# Request contacts or call history (this depends on the device's capabilities)
+# Example command for sending a file (you would adapt this for contacts)
+client.push('contacts.vcf')
+
+# Disconnect when done
+client.disconnect()
+------------------------------------------
+
+
+
